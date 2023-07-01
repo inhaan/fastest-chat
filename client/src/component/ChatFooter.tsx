@@ -1,4 +1,6 @@
-export const ChatFooter = () => {
+import { memo } from "react";
+
+export const ChatFooter = memo(() => {
   return (
     <footer className="w-full pt-5 text-xs text-right text-gray-400">
       <div>
@@ -19,4 +21,4 @@ export const ChatFooter = () => {
       on <a href="https://iconscout.com">IconScout</a>
     </footer>
   );
-};
+});

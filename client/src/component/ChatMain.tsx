@@ -1,5 +1,9 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, memo } from "react";
 
-export const ChatMain = ({ children }: PropsWithChildren) => {
-  return <main className="flex-1 flex flex-col">{children}</main>;
-};
+interface IChatMainProps extends PropsWithChildren {
+  className?: string;
+}
+
+export const ChatMain = memo(({ children, className }: IChatMainProps) => {
+  return <main className={`flex flex-col ${className}`}>{children}</main>;
+});

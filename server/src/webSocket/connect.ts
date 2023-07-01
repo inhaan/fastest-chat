@@ -48,7 +48,9 @@ export const handleWebSocketUpgrade = (
 const handleConnection = (ws: WebSocket, req: Request): void => {
   // URL에서 채팅방 ID 추출
   const { pathname, searchParams } = new URL(req.url, 'http://baseurl');
-  const chatRoomId = decodeURIComponent(pathname.substring(1) ?? '');
+  const chatRoomId = decodeURIComponent(
+    pathname.replace(/^\/chat\//gi, '') ?? '',
+  );
   const nickname = decodeURIComponent(searchParams.get('nickname') ?? '');
 
   // 채팅방 ID 또는 닉네임이 없을 경우 연결 종료

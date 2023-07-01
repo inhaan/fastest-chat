@@ -1,0 +1,27 @@
+{
+  "name": "fastest-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build",
+    "start": "cross-env NODE_ENV=production pm2 start ecosystem.config.js",
+    "kill": "pm2 kill"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inhaan/fastest-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inhaan/fastest-chat/issues"
+  },
+  "homepage": "https://github.com/inhaan/fastest-chat#readme",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "fs-extra": "^11.1.1",
+    "pm2": "^5.3.0"
+  }
+}

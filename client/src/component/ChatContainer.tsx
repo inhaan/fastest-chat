@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, memo } from "react";
 
-export const ChatContainer = ({ children }: PropsWithChildren) => {
+export const ChatContainer = memo(({ children }: PropsWithChildren) => {
   return <div className="flex flex-col w-full max-w-5xl">{children}</div>;
-};
+});

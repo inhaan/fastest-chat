@@ -1,30 +1,29 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import path from 'path';
+import url from 'url';
 import { limiter } from './middleware/limiter.js';
 import { infoAction } from './action/infoAction.js';
 import { checkNicknameAction } from './action/checkNicknameAction.js';
 import { handleWebSocketUpgrade, initWebSocket } from './webSocket/connect.js';
 
 const app = express();
-const __dirname = path.resolve();
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const __basedir = path.resolve();
 
 //middlewares
-app.use(limiter);
-
-// pages
-app.get('/', limiter, (_: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-app.get('/:id', limiter, (_: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'public', 'chat.html'));
-});
+app.use(express.static(path.join(__dirname, '../public')));
 
 // apis
 app.get('/api/chat-rooms', limiter, infoAction);
 app.get('/api/chat-rooms/:id/check-nickname', limiter, checkNicknameAction);
 
+// 모든 요청에 대해 index.html 반환
+app.get('*', (_, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
 // 서버 실행
-const config = await import(path.join('file:///', __dirname, 'config.json'), {
+const config = await import(path.join('file:///', __basedir, 'config.json'), {
   assert: { type: 'json' },
 });
 const PORT = config?.default?.port || 3000;

@@ -1,13 +1,17 @@
+import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Main } from "./page/Main";
-import { Chat } from "./page/Chat";
+
+const Main = lazy(() => import("./page/Main"));
+const Chat = lazy(() => import("./page/Chat"));
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/:roomId" element={<Chat />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <Suspense>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/:roomId" element={<Chat />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Suspense>
   );
 };
