@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "build.js",
+  "type": "module",
   "scripts": {
     "build": "node build",
-    "start": "cross-env NODE_ENV=production pm2 start ecosystem.config.js",
-    "kill": "pm2 kill"
+    "build:docker": "npm run build && docker build -t fastest-chat .",
+    "start": "cross-env NODE_ENV=production pm2-runtime start ecosystem.config.cjs",
+    "kill": "pm2 kill",
+    "deploy": "bash ./deploy.sh"
   },
   "repository": {
     "type": "git",

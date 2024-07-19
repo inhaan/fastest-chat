@@ -1,4 +1,8 @@
 const { execSync } = require("child_process");
+
+console.log("npm install....");
+console.log(execSync(`npm install`).toString());
+
 const fs = require("fs-extra");
 const path = require("path");
 
@@ -15,13 +19,13 @@ console.log("rm prod folder....");
 fs.rmSync(prodDir, { recursive: true, force: true });
 
 console.log("build server....");
-console.log(execSync(`cd ${serverDir} && npm run build`).toString());
+console.log(execSync(`cd ${serverDir} && npm install && npm run build`).toString());
 
 console.log("copy server...");
 fs.copySync(buildDir, prodDir);
 
 console.log("build client....");
-console.log(execSync(`cd ${clientDir} && npm run build`).toString());
+console.log(execSync(`cd ${clientDir} && npm install && npm run build`).toString());
 
 console.log("copy client...");
 fs.copySync(path.join(clientDir, "build"), publicDir);
